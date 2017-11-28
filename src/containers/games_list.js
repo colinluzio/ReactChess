@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class GamesList extends Component{
+
     renderGames(gameData){
         return(
             <tr>
@@ -9,9 +10,9 @@ class GamesList extends Component{
             </tr>
         )
     }
-    
-    render(){
 
+    render(){
+        console.log(this.props);
         return(
             <table className="table table-hover">
             <thead>

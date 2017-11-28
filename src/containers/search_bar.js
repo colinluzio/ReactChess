@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchUserGames} from '../actions/index';
-    
+import {setUser} from '../actions/user';
 
 class SearchBar extends Component{
-    
+
     constructor(props){
         super(props);
         this.state = {term: ''};
@@ -18,6 +18,7 @@ class SearchBar extends Component{
     onFormSubmit(event){
         event.preventDefault();
         this.props.fetchUserGames(this.state.term);
+        this.props.setUser(this.state.term);
         this.setState({term: ''});
     }
     render(){
@@ -34,7 +35,7 @@ class SearchBar extends Component{
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({fetchUserGames},dispatch);
+    return bindActionCreators({fetchUserGames,setUser},dispatch);
 }
 
 export default connect(null,mapDispatchToProps)(SearchBar);
