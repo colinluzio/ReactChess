@@ -12,15 +12,17 @@ class GamesList extends Component{
         this.state = {term: ''};
         this.changeUser = this.changeUser.bind(this);
     }
-    changeUser(event){
-        console.log(event.target);
+    changeUser(user,event){
+        event.preventDefault();
+        this.props.fetchUserGames(user);
+        this.props.setUser(user);
     }
     renderGames(user,gameData){
         var white = gameData.white.substring(gameData.white.lastIndexOf("/") + 1);
         var user  = (user == white ? gameData.black.substring(gameData.black.lastIndexOf("/") + 1) : white);
         return(
-            <tr key={user}>
-                <td><a href="#" onClick={this.changeUser}>{user}</a></td>
+            <tr key={gameData.url.substring(gameData.url.lastIndexOf("/") + 1)}>
+                <td><a href="#" onClick={this.changeUser.bind(this, user)}>{user}</a></td>
             </tr>
         )
     }
@@ -40,14 +42,16 @@ class GamesList extends Component{
                         {this.props.data.games[0].map(this.renderGames.bind(this, this.props.data.user))}
                     </tbody>
                 </table>
-            ) : (<div>You have nothing</div>)}
+            ) : (<div>No users with that name found!</div>)}
             </div>
         )
     }
 }
-
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({fetchUserGames,setUser},dispatch);
+}
 function mapStateToProps(data){
     return {data};
 }
 
-export default connect(mapStateToProps)(GamesList);
+export default connect(mapStateToProps,mapDispatchToProps)(GamesList);
