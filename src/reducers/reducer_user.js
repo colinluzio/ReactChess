@@ -1,9 +1,10 @@
 import {SET_USER} from '../actions/user';
 
-export default function(state = [[]], action){
+export default function(state = [{data:''}], action){
     switch(action.type){
         case SET_USER:
-        return [action.user]
+        return [action.payload]
     }
+    
     return state;
 }
