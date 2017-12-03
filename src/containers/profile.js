@@ -27,12 +27,12 @@ class Profile extends Component{
                     <div className = "col-md-8">
                         <div className="row">
                             <div className = "col-xs-12">
-                                Here
+                                {userData.username}
                             </div>
                         </div>
                         <div className="row">
                             <div className = "col-xs-12">
-                                Yes
+                                {userData.name}
                             </div>
                         </div>
                     </div>
