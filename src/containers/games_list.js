@@ -28,7 +28,7 @@ class GamesList extends Component{
     }
 
     render(){
-        var games = this.props.data.games[0]
+        var games = this.props.data.games[0];
         return(
             <div>
                 {games.length > 0 ? (
@@ -39,7 +39,7 @@ class GamesList extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.data.games[0].map(this.renderGames.bind(this, this.props.data.user.username))}
+                        {this.props.data.games[0].map(this.renderGames.bind(this, this.props.data.user[0].username))}
                     </tbody>
                 </table>
             ) : (<div>No users with that name found!</div>)}

@@ -7,8 +7,12 @@ export function setUser(user){
     const url = ROOT_URL+'pub/player/'+user
     const request = axios.get(url);
 
-    return{
-        type: SET_USER,
-        payload: request
-    }
+    return(dispatch) => {
+            request.then(({data}) => {
+                dispatch({type: 'SET_USER',payload: data})
+            }).catch((err) => {
+                dispatch({type: 'SET_USER',payload: {}})
+            })
+    };
+
 }

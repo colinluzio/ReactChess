@@ -12,12 +12,12 @@ class Profile extends Component{
 
     render(){
         var avatar = 'http://via.placeholder.com/200x200';
-        var userData = this.props.data.user[0].data;
+        var userData = this.props.data.user[0];
 
         if(userData.avatar){
             avatar = userData.avatar;
         }
-        
+
         return(
             <div>
                 <div className = "row">
