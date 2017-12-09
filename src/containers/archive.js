@@ -1,23 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {fetchArchive} from '../actions/archive';
 
 class Archive extends Component{
 
     constructor(props){
         super(props);
     }
-    changeUser(user,event){
+    fetchArchive(user,event){
         event.preventDefault();
+        this.props.fetchArchive(user);
     }
 
     render(){
-        var games = this.props.data.games[0];
+        console.log(this.props.data);
+        var user = {};
+        if(this.props.data.user){
+            user = this.props.data.user[0].username;
+        }
         return(
             <div>
                 <div className = "row">
                     <div className="col-xs-12">
-                        <button type="button" className="btn btn-primary">Fetch Archive</button>
+                        <button type="button" className="btn btn-primary" onClick={this.fetchArchive.bind(this, user)}>Fetch Archive</button>
                     </div>
                 </div>
                 <div className="row">
@@ -31,7 +37,7 @@ class Archive extends Component{
 }
 
 function mapDispatchToProps(dispatch){
-    return '';
+    return bindActionCreators({fetchArchive},dispatch);
 }
 function mapStateToProps(data){
     return {data};
