@@ -11,14 +11,14 @@ export function fetchArchive(user){
     return(dispatch) => {
         request.then(({data}) => {
             var archives = {archives:[]};
-            var archiveMonths = data.archives.slice(0,5);
+            var archiveMonths = data.archives.slice(0,10);
 
             archiveMonths.map(function(value,index){
                     const request =  axios.get(value);
                         request.then(({data}) => {
                             archives.archives.push(data);
 
-                            if(index == 4){
+                            if(index == 9){
                                 dispatch({type: 'FETCH_ARCHIVE',payload: archives});
                             }
                         });
