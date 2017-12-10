@@ -21,7 +21,7 @@ class Archive extends Component{
             user = this.props.data.user[0].username;
         }
         if(this.props.data.archive){
-            wins = GetBestWins(this.props.data.archive[0]);
+            wins = GetBestWins(this.props.data.archive[0],user);
         }
 
         return(
