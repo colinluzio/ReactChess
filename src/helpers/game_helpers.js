@@ -1,5 +1,4 @@
 export const GetBestWins = function(data,user) {
-    console.log(user);
     var games = [];
 
     data.map(function(value,index){
@@ -24,5 +23,6 @@ export const GetBestWins = function(data,user) {
         if(a.rating > b.rating) return 1;
         return 0;
     });
-    console.log(games);
+
+    return games.reverse();
 }

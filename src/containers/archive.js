@@ -23,7 +23,7 @@ class Archive extends Component{
         if(this.props.data.archive){
             wins = GetBestWins(this.props.data.archive[0],user);
         }
-
+        console.log(wins);
         return(
             <div>
                 <div className = "row">
@@ -33,7 +33,22 @@ class Archive extends Component{
                 </div>
                 <div className="row">
                     <div className="col-xs-12">
-
+                    {wins.length > 0 ? (
+                        <table className="table table-striped">
+                           <thead>
+                             <tr>
+                               <th>User</th>
+                               <th>Rating</th>
+                               <th>Played as</th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                               {wins.map(function(item,i){
+                                  return <tr key={i}><td>{item.opponent}</td><td>{item.rating}</td><td>{item.color}</td></tr>
+                               })}
+                           </tbody>
+                           </table>
+                ) : (<div>No wins for that user!</div>)}
                     </div>
                 </div>
             </div>
