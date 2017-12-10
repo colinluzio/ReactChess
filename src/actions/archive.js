@@ -10,6 +10,7 @@ export function fetchArchive(user){
 
     return(dispatch) => {
         request.then(({data}) => {
+            var promiseCount = 0;
             var archives = {archives:[]};
             var archiveMonths = data.archives.reverse().slice(0,12);
 
@@ -17,8 +18,8 @@ export function fetchArchive(user){
                     const request =  axios.get(value);
                         request.then(({data}) => {
                             archives.archives.push(data);
-
-                            if(index == 11){
+                            promiseCount += 1;
+                            if(promiseCount == 12){
                                 dispatch({type: 'FETCH_ARCHIVE',payload: archives});
                             }
                         });
