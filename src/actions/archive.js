@@ -19,7 +19,7 @@ export function fetchArchive(user){
                         request.then(({data}) => {
                             archives.archives.push(data);
                             promiseCount += 1;
-                            if(promiseCount == 12){
+                            if(promiseCount == 12 || promiseCount == archiveMonths.length){
                                 dispatch({type: 'FETCH_ARCHIVE',payload: archives});
                             }
                         });
@@ -27,18 +27,4 @@ export function fetchArchive(user){
             });
         });
     }
-
-    // return(dispatch) => {
-    //         request.then(({data}) => {
-    //             dispatch({type: 'FETCH_ARCHIVE',payload: data})
-    //         }).catch((err) => {
-    //             //reattempt to fetchUserGames
-    //             return(dispatch) => {
-    //                     request.then(({data}) => {
-    //                         dispatch({type: 'FETCH_',payload: data})
-    //                     });
-    //             };
-    //         })
-    // };
-
 }
