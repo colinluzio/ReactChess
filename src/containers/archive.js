@@ -19,9 +19,14 @@ class Archive extends Component{
     componentDidUpdate(){
         let user = (this.props.data.user ? this.props.data.user[0].username : '');
         let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user) : []);
-        
-        if(wins != this.state.wins && user != this.state.user){
-            this.setState({wins: wins,user:user});
+        let currentWins = this.state.wins;
+        let currentUser = this.state.user;
+
+        if(wins.toString() != currentWins.toString() && wins.length > 0){
+            this.setState({wins: wins});
+        }
+        if(user != currentUser && user != ''){
+            this.setState({user: user});
         }
     }
     fetchArchive(user,event){
