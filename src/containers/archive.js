@@ -11,6 +11,7 @@ class Archive extends Component{
         super(props);
 
         this.state = {
+            total: 10,
             user: '',
             activePage: 0,
             wins : []
@@ -18,7 +19,7 @@ class Archive extends Component{
     }
     componentDidUpdate(){
         let user = (this.props.data.user ? this.props.data.user[0].username : '');
-        let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user) : []);
+        let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user).slice(0,this.state.total) : []);
         let currentWins = this.state.wins;
         let currentUser = this.state.user;
 
@@ -34,6 +35,7 @@ class Archive extends Component{
         this.props.fetchArchive(user);
     }
     handlePageClick (data) {
+        console.log(data);
        //console.log(ReferralMain.props);
        //console.log(this.props);
 
