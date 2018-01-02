@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchArchive} from '../actions/archive';
 import ReactPaginate from 'react-paginate';
-import { GetBestWins } from '../helpers/game_helpers'
+import { GetBestWins } from '../helpers/game_helpers';
+import {lodash} from 'lodash';
 
 class Archive extends Component{
 
@@ -20,17 +21,17 @@ class Archive extends Component{
     componentDidUpdate(){
         let user = (this.props.data.user ? this.props.data.user[0].username : '');
         let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user).slice((this.state.activePage * this.state.total),(this.state.activePage * this.state.total)+this.state.total) : []);
-        console.log(wins.toString());
+
         let currentWins = this.state.wins;
         let currentUser = this.state.user;
 
-        if(wins.toString() != currentWins.toString() && wins.length > 0){
+        if(!_.isEqual(wins, currentWins) && wins.length > 0){
             this.setState({wins: wins});
         }
         if(user != currentUser && user != ''){
             this.setState({user: user});
         }
-    
+
     }
     fetchArchive(user,event){
         event.preventDefault();
