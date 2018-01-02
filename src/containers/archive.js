@@ -19,7 +19,8 @@ class Archive extends Component{
     }
     componentDidUpdate(){
         let user = (this.props.data.user ? this.props.data.user[0].username : '');
-        let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user).slice(0,this.state.total) : []);
+        let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user).slice((this.state.activePage * this.state.total),(this.state.activePage * this.state.total)+this.state.total) : []);
+        console.log(wins.toString());
         let currentWins = this.state.wins;
         let currentUser = this.state.user;
 
@@ -29,17 +30,14 @@ class Archive extends Component{
         if(user != currentUser && user != ''){
             this.setState({user: user});
         }
+    
     }
     fetchArchive(user,event){
         event.preventDefault();
         this.props.fetchArchive(user);
     }
     handlePageClick (data) {
-        console.log(data);
-       //console.log(ReferralMain.props);
-       //console.log(this.props);
-
-
+        this.setState({activePage: data.selected});
    };
     render(){
 
