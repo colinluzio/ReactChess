@@ -1,14 +1,14 @@
 import { renderComponent , expect } from '../test_helper';
-import App from '../../src/components/app';
+import SearchBar from '../../src/containers/search_bar';
 
-describe('App' , () => {
+describe('SearchBar' , () => {
   let component;
 
   beforeEach(() => {
-    component = renderComponent(App);
+    component = renderComponent(SearchBar);
   });
 
   it('renders something', () => {
-    expect(component).to.exist;
+    expect(component.find('input')).to.exist;
   });
 });
