@@ -34,6 +34,7 @@ class Archive extends Component{
 
     }
     fetchArchive(user,event){
+        let player = 'nkrtp';
         event.preventDefault();
         this.props.fetchArchive(user);
     }
