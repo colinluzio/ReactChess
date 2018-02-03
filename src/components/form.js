@@ -9,21 +9,21 @@ class Form extends Component {
         return(
             <form onSubmit={handleSubmit(this.props.registerUser)}>
                 <h3>Register</h3>
-                <div className={`form-group ${name.touched && name.invalid ? 'has-error' : ''}`}>
+                <div className={`form-group ${name.touched && name.invalid ? 'has-danger' : ''}`}>
                     <label>Name</label>
                     <input type="text" className="form-control" {...name}/>
                 </div>
                 <div className="text-help">
                     {name.touched ? name.error : ''}
                 </div>
-                <div className={`form-group ${username.touched && username.invalid ? 'has-error' : ''}`}>
+                <div className={`form-group ${username.touched && username.invalid ? 'has-danger' : ''}`}>
                     <label>UserName</label>
                     <input type="text" className="form-control" {...username}/>
                 </div>
                 <div className="text-help">
                     {username.touched ? username.error : ''}
                 </div>
-                <div className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
+                <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
                     <label>Password</label>
                     <input type="password" className="form-control" {...password}/>
                 </div>
