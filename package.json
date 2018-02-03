@@ -38,6 +38,7 @@
     "react-paginate": "^5.0.0",
     "react-redux": "^4.4.8",
     "react-router": "^2.8.1",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-form": "^4.1.3"
   }
 }
