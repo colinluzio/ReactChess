@@ -1,61 +1,29 @@
 import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
 import {registerUser} from '../actions/index';
+import {Login} from './login';
+import Register from './register';
 
-class Form extends Component {
+export default class Form extends Component {
 
     render() {
-        const {fields: {name,username,password},handleSubmit} = this.props;
+
         return(
-            <form onSubmit={handleSubmit(this.props.registerUser)}>
-                <h3>Register</h3>
-                <div className={`form-group ${name.touched && name.invalid ? 'has-danger' : ''}`}>
-                    <label>Name</label>
-                    <input type="text" className="form-control" {...name}/>
+            <div>
+                <ul className="nav nav-tabs">
+                    <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#login">Login</a></li>
+                    <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#register">Register</a></li>
+                </ul>
+
+                <div className="tab-content">
+                    <div id="login" className="tab-pane fade in active">
+
+                    </div>
+                    <div id="register" className="tab-pane fade">jhjh
+                        <Register/>
+                    </div>
                 </div>
-                <div className="text-help">
-                    {name.touched ? name.error : ''}
-                </div>
-                <div className={`form-group ${username.touched && username.invalid ? 'has-danger' : ''}`}>
-                    <label>UserName</label>
-                    <input type="text" className="form-control" {...username}/>
-                </div>
-                <div className="text-help">
-                    {username.touched ? username.error : ''}
-                </div>
-                <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
-                    <label>Password</label>
-                    <input type="password" className="form-control" {...password}/>
-                </div>
-                <div className="text-help">
-                    {password.touched ? password.error : ''}
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary">Register</button>
-                </div>
-            </form>
+            </div>
         )
     }
 }
-function validate(values){
-    const errors ={};
-
-    if(!values.name){
-        errors.name = 'Enter a name';
-    }
-    if(!values.username){
-        errors.username = 'Enter a user name';
-    }
-
-    if(!values.password){
-        errors.password = 'Enter a password';
-    }
-
-    return errors;
-}
-
-export default reduxForm({
-    form: 'RegistrationForm',
-    fields: ['name', 'username','password'],
-    validate
-},null,{registerUser})(Form);
