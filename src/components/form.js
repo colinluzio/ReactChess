@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
 import {registerUser} from '../actions/index';
-import {Login} from './login';
+import Login from './login';
 import Register from './register';
 
 export default class Form extends Component {
@@ -16,10 +16,11 @@ export default class Form extends Component {
                 </ul>
 
                 <div className="tab-content">
-                    <div id="login" className="tab-pane fade in active">
+                    <div id="login" className="tab-pane fade show active">
 
+                        <Login/>
                     </div>
-                    <div id="register" className="tab-pane fade">jhjh
+                    <div id="register" className="tab-pane fade">
                         <Register/>
                     </div>
                 </div>

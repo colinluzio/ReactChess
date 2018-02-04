@@ -32,7 +32,7 @@ export function registerUser(props){
 
 export function loginUser(props){
     return{
-        type: REGISTER_USER,
-        payload: {}
+        type: LOGIN_USER,
+        payload: {'logged_in':true}
     }
 }
