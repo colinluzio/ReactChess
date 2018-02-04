@@ -1,4 +1,5 @@
 import axios from 'axios';
+import "babel-polyfill";
 
 const ROOT_URL = 'https://api.chess.com/';
 let promiseCount = 0;
@@ -13,48 +14,32 @@ export function fetchArchive(user){
     return(dispatch) => {
         request.then(({data}) => {
 
-            var archiveMonths = data.archives.reverse().slice(0,12);
+            let archiveMonths = data.archives.reverse().slice(0,12);
             let interval = 1000;
+            let _start = async function(){
+                for(let x = 0; x < archiveMonths.length; x++){
+                    await fetchMonthData(archiveMonths[x]);
+                }
+                dispatch({type: 'FETCH_ARCHIVE',payload: archives});
+            }
+            _start();
 
-            archiveMonths.map(function(value,index){
-                    const request =  axios.get(value);
-                        request.then(({data}) => {
-                            //reset interval to 1000
-                            archives.archives.push(data);
-                            promiseCount += 1;
-                            if(promiseCount == 12 || promiseCount == archiveMonths.length){
-                                dispatch({type: 'FETCH_ARCHIVE',payload: archives});
-                            }
-                        }).catch(function(e){
-                            interval += 500;
-                            setTimeout(function(){
-                                const request =  axios.get(value);
-                                    request.then(({data}) => {
-                                        archives.archives.push(data);
-                                        promiseCount += 1;
-                                        console.log(promiseCount);
-                                        if(promiseCount == 12 || promiseCount == archiveMonths.length){
-                                            console.log(archives);
-                                                dispatch({type: 'FETCH_ARCHIVE',payload: archives});
-                                        }
-                                    }).catch(function(e){
-
-                                        console.log('got here');
-
-                                });
-                            },interval);
-
-                    });
-
-            });
         });
     }
-    function testThis(){
 
-    }
-    function handleRejection(time, value){
+    function fetchMonthData(data){
+        let action = new Promise(function(resolve,reject){
 
+            const request =  axios.get(data);
 
+            request.then(function(amount){
+                archives.archives.push(amount.data);
+                resolve(amount.data);
+            }).catch(function(err){
+                console.log(err);
+            });
+        });
+        return action;
 
     }
 }
