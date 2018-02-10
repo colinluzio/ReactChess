@@ -7,9 +7,9 @@ class Login extends Component {
 
 
     componentDidUpdate(){
-        if (this.props.data.login && this.props.data.login == 'true') {
-            browserHistory.push('/resources');
-        }
+        // if (this.props.data.login && this.props.data.login == 'true') {
+        //     browserHistory.push('/resources');
+        // }
     }
     render() {
 

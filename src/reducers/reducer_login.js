@@ -1,10 +1,10 @@
 import {LOGIN_USER} from '../actions/index';
 
-export default function(state = {}, action){
+export default function(state = false, action){
 
     switch(action.type){
         case LOGIN_USER:
-        return [action.payload.logged_in]
+        return action.payload
     }
     return state;
 }

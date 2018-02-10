@@ -33,6 +33,6 @@ export function registerUser(props){
 export function loginUser(props){
     return{
         type: LOGIN_USER,
-        payload: {'logged_in':true}
+        payload: true
     }
 }

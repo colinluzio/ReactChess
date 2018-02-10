@@ -10,6 +10,6 @@ const rootReducer = combineReducers({
   user: UserReducer,
   form: formReducer,
   archive: ArchiveReducer,
-  login: LoginReducer});
+  authenticated: LoginReducer});
 
 export default rootReducer;
