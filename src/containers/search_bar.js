@@ -23,13 +23,17 @@ class SearchBar extends Component{
     }
     render(){
         return(
-        <form onSubmit={this.onFormSubmit} className ="input-group">
-            <input placeholder="Search members by username" className = "form-control" value={this.state.term}
-            onChange={this.onInputChange}/>
-            <span className="input-group-btn">
-                <button type="submit" className="btn btn-secondary">Submit</button>
-            </span>
-        </form>
+            <div id="search" className="panel-collapse collapse">
+                <div className="panel-body">
+                    <form className="navbar-form" role="search" onSubmit={this.onFormSubmit}>
+                        <div className="form-group">
+                            <input type="text" className="form-control" placeholder="Search" value={this.state.term}
+                            onChange={this.onInputChange}/>
+                        </div>
+                        <button type="submit" className="btn btn-default "><span className="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                </div>
+            </div>
     )
     }
 }

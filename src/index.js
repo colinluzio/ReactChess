@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import{Router, Route, browserHistory} from 'react-router';
+import Profile from  './containers/profile';
 import Resources from './components/resources';
 import requireAuth from './components/require_authentication';
 import Archive from './containers/archive';
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route path="/" component={App}>
             <Route path ="/resources" component={requireAuth(Resources)}/>
             <Route path ="/resources/archive" component={Archive}/>
+            <Route path ="/profile/*" component={Profile}/>
             <Route path ="/login" component={Form}/>
         </Route>
     </Router>

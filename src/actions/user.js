@@ -11,10 +11,7 @@ export function setUser(user){
             request.then(({data}) => {
                 dispatch({type: 'SET_USER',payload: data})
             }).catch((err) => {
-                //retry request if requests are limited
-                request.then(({data}) => {
-                    dispatch({type: 'SET_USER',payload: data})
-                })
+                console.log(err);
             })
     };
 

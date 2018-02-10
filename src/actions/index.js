@@ -5,6 +5,7 @@ const ROOT_URL = 'https://api.chess.com/';
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGGEDIN_USER = 'LOGGEDIN_USER';
 
 export function fetchUserGames(user){
     const url = ROOT_URL+'pub/player/'+user+'/games'
@@ -33,6 +34,6 @@ export function registerUser(props){
 export function loginUser(props){
     return{
         type: LOGIN_USER,
-        payload: true
+        payload: 'badboy1980'
     }
 }
