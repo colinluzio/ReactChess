@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import{Router, Route, browserHistory} from 'react-router';
 import Resources from './components/resources';
 import requireAuth from './components/require_authentication';
+import Archive from './containers/archive';
 import Form from './components/form';
 import App from './components/app';
 import reducers from './reducers';
@@ -17,6 +18,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <Route path ="/resources" component={requireAuth(Resources)}/>
+            <Route path ="/resources/archive" component={Archive}/>
             <Route path ="/login" component={Form}/>
         </Route>
     </Router>
