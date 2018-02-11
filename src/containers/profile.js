@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import SideMenu from '../components/side_menu';
-import {getCountry} from '../helpers/profile_helper';
+import {getCountry,getDate} from '../helpers/profile_helper';
 import {fetchUserGames} from '../actions/index';
 import {setUser} from '../actions/user';
 
@@ -36,8 +36,8 @@ class Profile extends Component{
         data.name           = (userData.name ? userData.name : '');
         data.country        = (userData.country ? getCountry(userData.country) : '');
         data.location       = (userData.location ? userData.location : '');
-        data.joined         = (userData.joined ? userData.joined : '');
-        data.last_online    = (userData.last_online ? userData.last_online : '');
+        data.joined         = (userData.joined ? getDate(userData.joined) : '');
+        data.last_online    = (userData.last_online ? getDate(userData.last_online) : '');
 
         return data;
 
