@@ -335,3 +335,16 @@
     margin: 0;
   }
 }
+
+#profile{
+    width:100%;
+}
+#profile td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    width:50%;
+}
+#profile tr:nth-child(even){background-color: #f2f2f2;}
+.profile-left{
+    font-weight:bold;
+}
