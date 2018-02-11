@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchArchive} from '../actions/archive';
+import SideMenu from '../components/side_menu';
 import ReactPaginate from 'react-paginate';
 import { GetBestWins } from '../helpers/game_helpers';
 import {lodash} from 'lodash';
@@ -13,13 +14,25 @@ class Archive extends Component{
 
         this.state = {
             total: 10,
-            user: '',
             activePage: 0,
             wins : []
         };
     }
+    static contextTypes = {
+        router: React.PropTypes.object
+    }
+    componentWillMount(){
+        if(!this.props.params.splat){
+            this.context.router.push('/');
+        }
+        let user = this.props.params.splat;
+        console.log(user);
+        this.setState({user:user});
+
+        this.props.fetchArchive(user);
+    }
+
     componentDidUpdate(){
-        let user = (this.props.data.user ? this.props.data.user[0].username : '');
         let wins = (this.props.data.archive ? GetBestWins(this.props.data.archive[0],this.state.user).slice((this.state.activePage * this.state.total),(this.state.activePage * this.state.total)+this.state.total) : []);
 
         let currentWins = this.state.wins;
@@ -28,15 +41,7 @@ class Archive extends Component{
         if(!_.isEqual(wins, currentWins) && wins.length > 0){
             this.setState({wins: wins});
         }
-        if(user != currentUser && user != ''){
-            this.setState({user: user});
-        }
 
-    }
-    fetchArchive(user,event){
-        let player = 'nkrtp';
-        event.preventDefault();
-        this.props.fetchArchive(user);
     }
     handlePageClick (data) {
         this.setState({activePage: data.selected});
@@ -45,43 +50,55 @@ class Archive extends Component{
 
         return(
             <div>
-                <div className = "row">
-                    <div className="col-xs-12">
-                        <button type="button" className="btn btn-primary" onClick={this.fetchArchive.bind(this, this.state.user)}>Fetch Archive</button>
-                    </div>
-                </div>
                 <div className="row">
                     <div className="col-xs-12">
                     {this.state.wins.length > 0 ? (
-                        <div>
-                            <div>
-                                <table className="table table-striped">
-                                   <thead>
-                                     <tr>
-                                       <th>User</th>
-                                       <th>Rating</th>
-                                       <th>Played as</th>
-                                     </tr>
-                                   </thead>
-                                   <tbody>
-                                       {this.state.wins.map(function(item,i){
-                                          return <tr key={i}><td>{item.opponent}</td><td>{item.rating}</td><td>{item.color}</td></tr>
-                                       })}
-                                   </tbody>
-                                </table>
-                            </div>
-                            <div>
-                            <ReactPaginate previousLabel={"previous"}
-                                       nextLabel={"next"}
-                                       breakLabel={<a href="">...</a>}
-                                       breakClassName={"break-me"}
-                                       pageCount={20}
-                                       marginPagesDisplayed={2}
-                                       pageRangeDisplayed={5}
-                                       onPageChange={this.handlePageClick.bind(this)}
-                                       containerClassName={"pagination"}
-                                       subContainerClassName={"pages pagination"}
-                                       activeClassName={"active"} />
+
+                        <div className="row">
+                            <div className="col-xs-12">
+                                <SideMenu />
+                                <div className="container-fluid">
+                                    <div className="side-body">
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <h1>Archive for {this.state.user}</h1>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <div>
+                                                    <table className="table table-striped">
+                                                       <thead>
+                                                         <tr>
+                                                           <th>User</th>
+                                                           <th>Rating</th>
+                                                           <th>Played as</th>
+                                                         </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                           {this.state.wins.map(function(item,i){
+                                                              return <tr key={i}><td><a href={"/profile/"+item.opponent}>{item.opponent}</a></td><td>{item.rating}</td><td>{item.color}</td></tr>
+                                                           })}
+                                                       </tbody>
+                                                    </table>
+                                                </div>
+                                                <div>
+                                                <ReactPaginate previousLabel={"previous"}
+                                                           nextLabel={"next"}
+                                                           breakLabel={<a href="">...</a>}
+                                                           breakClassName={"break-me"}
+                                                           pageCount={20}
+                                                           marginPagesDisplayed={2}
+                                                           pageRangeDisplayed={5}
+                                                           onPageChange={this.handlePageClick.bind(this)}
+                                                           containerClassName={"pagination"}
+                                                           subContainerClassName={"pages pagination"}
+                                                           activeClassName={"active"} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

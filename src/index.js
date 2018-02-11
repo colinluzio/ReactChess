@@ -19,7 +19,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <Route path ="/resources" component={requireAuth(Resources)}/>
-            <Route path ="/resources/archive" component={Archive}/>
+            <Route path ="/archive/*" component={Archive}/>
             <Route path ="/profile/*" component={Profile}/>
             <Route path ="/login" component={Form}/>
         </Route>

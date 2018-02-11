@@ -348,3 +348,8 @@
 .profile-left{
     font-weight:bold;
 }
+.games-empty {
+    padding-top: 30px;
+    font-size: 22px;
+    text-align: center;
+}

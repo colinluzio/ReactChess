@@ -9,20 +9,18 @@ class GamesList extends Component{
 
     constructor(props){
         super(props);
-        this.state = {term: ''};
-        this.changeUser = this.changeUser.bind(this);
+        this.state = {term: '',user:this.props.user};
     }
-    changeUser(user,event){
-        event.preventDefault();
-        this.props.fetchUserGames(user);
-        this.props.setUser(user);
+    componentWillMount()
+    {
+        this.props.fetchUserGames(this.state.user);
     }
     renderGames(user,gameData){
         var white = gameData.white.substring(gameData.white.lastIndexOf("/") + 1);
         var user  = (user == white ? gameData.black.substring(gameData.black.lastIndexOf("/") + 1) : white);
         return(
             <tr key={gameData.url.substring(gameData.url.lastIndexOf("/") + 1)}>
-                <td><a href="#" onClick={this.changeUser.bind(this, user)}>{user}</a></td>
+                <td><a href="#">{user}</a></td>
             </tr>
         )
     }
@@ -42,7 +40,7 @@ class GamesList extends Component{
                         {this.props.data.games[0].map(this.renderGames.bind(this, this.props.data.user[0].username))}
                     </tbody>
                 </table>
-            ) : (<div>No users with that name found!</div>)}
+            ) : (<div className="games-empty">No current games found</div>)}
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import SideMenu from '../components/side_menu';
+import GamesList from './games_list';
 import {getCountry,getDate} from '../helpers/profile_helper';
 import {fetchUserGames} from '../actions/index';
 import {setUser} from '../actions/user';
@@ -23,7 +24,6 @@ class Profile extends Component{
         let user = this.props.params.splat;
         this.setState({user:user});
         this.props.setUser(user);
-        console.log(this.props);
     }
     componentWillReceiveProps(nextProps){
         let userData = nextProps.data.user[0];
@@ -79,6 +79,11 @@ class Profile extends Component{
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-xs-12">
+                                    <GamesList user={this.state.user}/>
                                 </div>
                             </div>
                         </div>
